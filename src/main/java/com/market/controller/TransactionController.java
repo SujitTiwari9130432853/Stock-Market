@@ -1,0 +1,48 @@
+package com.market.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.market.model.Market;
+import com.market.model.Transactions;
+import com.market.service.TransactionService;
+
+@RestController
+@RequestMapping
+public class TransactionController {
+	@Autowired
+	TransactionService transactionservice;
+	
+	@PostMapping("/transaction/save")
+	public Transactions addTrans(@RequestBody Transactions t){
+		Transactions add=transactionservice.saveTransaction(t);
+		return add;
+	}
+	
+	@GetMapping("/transaction/{id}")
+	public Optional<Transactions> getbyID(@PathVariable int id){
+		Optional<Transactions> getTrans=transactionservice.getById(id);
+		return getTrans;
+	}
+	
+	@GetMapping("/transaction/all")
+	public List<Transactions> allTrans(@RequestBody Transactions t1){
+		List<Transactions> getAll=transactionservice.getAll(t1);
+		return getAll;
+	}
+	
+	@PutMapping("Transaction/update")
+	public List<Object> updateMarket(@RequestBody Transactions transaction){
+		return transactionservice.saveTransactionupdate(transaction);
+	}
+
+}
