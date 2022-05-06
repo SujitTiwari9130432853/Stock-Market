@@ -1,6 +1,7 @@
 package com.market.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -47,4 +48,24 @@ public class TransactionService {
 		transactionrepo.save(transaction);
 		return list;
 	}
+	
+	public String deleteById(int id){
+		List<Transactions> l = new ArrayList<>();
+		List<Transactions> t = transactionrepo.findAll();
+		for (Transactions transactions : t) {
+			if (transactions.getId()==id) {
+				transactionrepo.deleteById(id);
+			} else {
+				l.add(transactions);
+			}
+		}
+		return "The element is Deleted";
+	}
+	
+	public String deleteAll(){
+		List<Transactions> all = transactionrepo.findAll();
+		transactionrepo.deleteAll(all);
+		return "ALL ELEMETS DELETED!!! IT'S EMPTY NOW";
+	}
+	
 }

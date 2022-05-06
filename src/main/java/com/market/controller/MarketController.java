@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,18 @@ public class MarketController {
 		return allmarket;
 	}
 	
+	@DeleteMapping("/market/{id}")
+	public String deleteById(@PathVariable int id){
+		String l = marketservice.deleteById(id);
+		return l;
+		
+	}
+	
+	@DeleteMapping("/market/deleteAll")
+	public String deleteAll(@RequestBody Market m1){
+		String l = marketservice.deleteAll();
+		return l;
+	}
 	
 
 }

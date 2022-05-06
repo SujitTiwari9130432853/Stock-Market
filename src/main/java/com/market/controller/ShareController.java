@@ -1,19 +1,20 @@
 package com.market.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.market.model.Share;
-import com.market.model.Transactions;
 import com.market.service.ShareService;
 
 @RestController
@@ -38,5 +39,17 @@ public class ShareController {
 		List<Share> allshare=shareservice.getAll(share);
 		return allshare;
 	}
+	
+	@DeleteMapping("/share/{id}")
+	public String deleteById(@PathVariable int id){
+		String l = shareservice.deleteById(id);
+		return l;
+	}
+	
+	@DeleteMapping("/share/deleteAll")
+	public String deleteAll(@RequestBody Share share1){
+		String l = shareservice.deleteAll();
+		return l;
+ 	}
 	
 }

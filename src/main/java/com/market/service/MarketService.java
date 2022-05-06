@@ -1,5 +1,6 @@
 package com.market.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +36,26 @@ public class MarketService {
 	public List<Market> getAll(Market market){
 		List<Market> all=marketrepo.findAll();
 		return all;
+	}
+	
+	public String deleteById(int id){
+		List<Market> l = new ArrayList<Market>();
+		List<Market> all = marketrepo.findAll();
+		for (Market market : all) {
+			if (market.getId()==id) {
+				marketrepo.delete(market);
+			} else {
+				l.add(market);
+			}
+		}
+		System.out.println(l);
+		return "THE ELEMENT IS DELETED";
+	}
+	
+	public String deleteAll(){
+		List<Market> all = marketrepo.findAll();
+		marketrepo.deleteAll(all);
+		return "ALL ELEMETS DELETED!!! IT'S EMPTY NOW";
 	}
 	
 

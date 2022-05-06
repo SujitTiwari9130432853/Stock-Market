@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,18 @@ public class ShareValueController {
 	public List<ShareValue> getAll(@RequestBody ShareValue s){
 		List<ShareValue> getall=sharevalueservice.getAll(s);
 		return getall;
+	}
+	
+	@DeleteMapping("/sharevalue/{id}")
+	public String deleteById(@PathVariable int id){
+		String l = sharevalueservice.deleteById(id);
+		return l;
+	}
+	
+	@DeleteMapping("/sharevalue/deleteAll")
+	public String deleteAll(@RequestBody ShareValue sv){
+		String l = sharevalueservice.deleteAll();
+		return l;
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.market.service;
 
 import java.util.ArrayList;
+
+
 import java.util.List;
 import java.util.Optional;
 
@@ -9,10 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 import com.market.model.Share;
-import com.market.model.ShareValue;
-import com.market.model.Transactions;
 import com.market.repo.MarketRepo;
 import com.market.repo.ShareRepo;
 import com.market.repo.ShareValueRepo;
@@ -47,5 +46,25 @@ public class ShareService {
 		List<Share> all=sharerepo.findAll();
 		return all;
 	}
+	
+	public String deleteById(int id){
+		List<Share> s = new ArrayList<>();
+		List<Share> l = sharerepo.findAll();
+		for (Share share : l) {
+			if (share.getId()==id) {
+				sharerepo.delete(share);
+			} else {
+				s.add(share);
+			}
+		}
+		return "The element is deleted";
+	}
+	
+	public String deleteAll(){
+		List<Share> all = sharerepo.findAll();
+		sharerepo.deleteAll(all);
+		return "ALL ELEMETS DELETED!!! IT'S EMPTY NOW";
+	}
+	
 
 }
